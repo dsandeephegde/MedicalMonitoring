@@ -1,13 +1,11 @@
+from flask import request
+
+from app import AEModels
 from app import app
-from app import mysql
 
 
-@app.route('/')
-def index():
-    cursor = mysql.connection.cursor()
-    cursor.execute('''select * from project''')
-    data = cursor.fetchall()
-    if data is None:
-        return "Username or Password is wrong"
-    else:
-        return "Database connection is working"
+@app.route('/ae/lof', methods=['POST'])
+def lof():
+    request_json = request.get_json()
+    data = AEModels.lof(request_json['table'], request_json['tests'])
+    return data.to_json()
