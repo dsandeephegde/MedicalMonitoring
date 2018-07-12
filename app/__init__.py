@@ -12,3 +12,4 @@ app.config.from_object('config')
 # Load the Apis
 from app import api
 from app import AEModels
+from app import filters
